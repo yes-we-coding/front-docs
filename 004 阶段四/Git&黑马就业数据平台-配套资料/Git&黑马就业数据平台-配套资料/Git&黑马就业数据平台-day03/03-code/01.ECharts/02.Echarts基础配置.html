@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #main {
+      border: 1px solid #000;
+    }
+  </style>
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+  <div id="main" style="width: 800px;height:600px;"></div>
+  <!-- 下包+导包 -->
+  <script src="./lib/echarts.min.js"></script>
+  <script>
+    // 食物数据
+    const foodArr = [
+      { name: '西兰花', price: 150 },
+      { name: '西瓜', price: 230 },
+      { name: '西葫芦', price: 224 },
+      { name: '西北风', price: 34 },
+      { name: '西红柿', price: 135 },
+      { name: '西芹', price: 147 },
+      { name: '西洋菜', price: 260 },
+    ]
+
+    // 基于准备好的dom，初始化echarts实例
+    const myChart = echarts.init(document.querySelector('#main'))
+
+    // 指定图表的配置项和数据
+    const option = {
+      // 标题组件
+      title: {
+        // 主标题文本
+        text: '食物售价'
+      },
+      // 图例组件，可以用来切换图形的显示和隐藏
+      legend: {
+        // 离右侧的距离
+        right: '5%',
+        // 数据数组，修改内容，需要和series中的name属性对应，否则无法显示
+        data: ['价格']
+      },
+      // 绘图网格
+      grid: {
+        // 离左侧容器的距离，默认10%
+        left: '20%'
+      },
+      // 直角坐标系 grid 中的 x 轴
+      xAxis: {
+        // 类目数据
+        data: foodArr.map(v => v.name)
+        // data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子', '西蓝花']
+      },
+      // 直角坐标系 grid 中的 y 轴
+      yAxis: {
+        // y轴的分割线
+        splitLine: {
+          // 分割线的样式
+          lineStyle: {
+            // 分割线的类型
+            //  dashed 虚线，默认是solid 实线
+            type: 'dashed'
+          }
+        }
+      },
+      // 提示框组件
+      tooltip: {
+        // 触发方式，默认图形
+        trigger: 'axis'
+      },
+      // 系列列表（设置不同的图形）
+      series: [
+        {
+          // 系列名称，tooltip,legend都会用到
+          name: '价格',
+          // 柱状图
+          type: 'bar',
+          // 系列的数据
+          data: foodArr.map(v => v.price)
+          // data: [5, 30, 36, 10, 10, 20, 66]
+        }
+      ],
+      // 调色盘颜色列表
+      color: ['#86cce9']
+    }
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option)
+  </script>
+</body>
+
+</html>

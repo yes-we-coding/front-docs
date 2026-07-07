@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #main {
+      border: 1px solid #000;
+    }
+  </style>
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+  <div id="main" style="width: 800px;height:600px;"></div>
+  <!-- 下包+导包 -->
+  <script src="./lib/echarts.min.js"></script>
+  <script>
+    // 基于准备好的dom，初始化echarts实例
+    const myChart = echarts.init(document.querySelector('#main'))
+
+    // 指定图表的配置项和数据
+    const option = {
+      // 标题
+      title: {
+        // 标题的文本
+        text: '商品销量'
+      },
+      tooltip: {},
+      legend: {
+        data: ['销量']
+      },
+      xAxis: {
+        data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子', '西蓝花']
+      },
+      yAxis: {},
+      series: [
+        {
+          name: '销量',
+          type: 'bar',
+          data: [5, 30, 36, 10, 10, 20, 66]
+        }
+      ]
+    }
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option)
+  </script>
+</body>
+
+</html>
